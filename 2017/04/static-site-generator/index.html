@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="math, programming, learning" name="keywords">
+<meta content="Leo Mao" name="author">
+<meta property="og:title" content="Static Site Generator - 0/1 World">
+<meta property="og:url" content="https://leomao.github.io/2017/04/static-site-generator/">
+<meta property="og:description" content="">
+<meta property="og:type" content="website" />
+<title>Static Site Generator | 0/1 World</title>
+<link rel="stylesheet" href="https://leomao.github.io//css/style.css">
+<link rel="shortcut icon" href="https://leomao.github.io//favicon.ico">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css" integrity="sha256-Zd1icfZ72UBmsId/mUcagrmN7IN5Qkrvh75ICHIQVTk=" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+
+</head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://leomao.github.io/"><h1 class="title is-4">0/1 World</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://github.com/leomao" target="_blank">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://leomao.github.io/index.xml" target="_blank">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title"><span class="title-text">Static Site Generator</span></h1>
+    <h2 class="subtitle is-6">April 5, 2017 </h2>
+    
+    <div class="content">
+      <h1 id="static-site">Static Site</h1>
+
+<p>已經想要玩一下 static site generator 很久了，研究了一下後決定來玩玩看 hugo。</p>
+
+<p></p>
+
+<h2 id="code-block">Code block</h2>
+
+<p>玩 static site 當然要有 code block 啊(？</p>
+
+<pre><code class="language-python">import numpy as np
+
+A = np.random.random((10, 10))
+B = np.random.random((10, 10))
+print(A @ B) # python 3.5+ new syntax
+</code></pre>
+
+<pre><code class="language-javascript">const a = { test: 123 };
+console.log('Hello World!');
+</code></pre>
+
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main()
+{
+  cout &lt;&lt; &quot;Hao 123&quot; &lt;&lt; endl;
+  return 0;
+}
+</code></pre>
+
+<h2 id="math">Math</h2>
+
+<p>不過我也想打點 <span>$\KaTeX$</span> (竟然不能打<code>\LaTeX</code>，不過真的滿快的)</p>
+
+<div>
+\[
+  \ln x = \int_{1}^x \frac{1}{t} \, dt
+\]
+</div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>莫名奇妙的 section，總之以後試著整理一些理論和技術文章好了&hellip;</p>
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>Leo Mao © 2017 | <a href="http://github.com/leomao/hucore" target="_blank">Hucore theme</a> & <a href="http://gohugo.io" target="_blank">Hugo</a> ♥</p>
+  </div>
+</section>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script>renderMathInElement(document.body, {
+  delimiters: [
+    {left: "\\[", right: "\\]", display: true},
+    {left: "\\(", right: "\\)", display: false},
+    {left: "$", right: "$", display: false},
+  ]
+});</script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>
