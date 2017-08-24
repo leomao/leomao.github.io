@@ -1,8 +1,7 @@
----
-title: Static Site Generator
-date: "2017-04-05"
-
----
++++
+title = "Static Site Generator"
+date = "2017-04-05"
++++
 
 # Static Site
 
