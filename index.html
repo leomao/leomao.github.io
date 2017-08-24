@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta name="generator" content="Hugo 0.25.1" />
+	<meta name="generator" content="Hugo 0.26" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta content="math, programming, learning" name="keywords">
@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" integrity="sha256-Zd1icfZ72UBmsId/mUcagrmN7IN5Qkrvh75ICHIQVTk=" crossorigin="anonymous" />
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.2/katex.min.css" integrity="sha256-pmSID7hiMUqUoWkA+bsTHWJcXTwerWFtk+Z4xa0gN7I=" crossorigin="anonymous" />
 
 </head>
 
@@ -52,6 +52,54 @@
 
 <section class="section">
   <div class="container">
+    
+    <article>
+      <h1 class="title"><a class="title-text" href="https://leomao.github.io/2017/08/comments-in-markdown/">Comments in Markdown</a></h1>
+      <h2 class="subtitle is-6">August 24, 2017</h2>
+      
+      <div class="content">
+        <p>Markdown 似乎沒有註解的語法，隨意查了一下後發現一個簡單的方法：</p>
+
+<pre><code class="language-markdown">[//]: # ( This is a comment )
+</code></pre>
+
+<p>簡單來說就是建一個沒用的 link reference 來當作註解啦。這個方法可以用來設定 Vim 的 modeline，也算是解決了一個小問題。範例：</p>
+
+<pre><code class="language-markdown">[modeline]: # ( vim: set cc=0 tw=0: )
+</code></pre>
+
+<p></p>
+        
+      </div>
+    </article>
+    
+    <article>
+      <h1 class="title"><a class="title-text" href="https://leomao.github.io/2017/08/sync-files-via-ssh/">Sync Files via SSH</a></h1>
+      <h2 class="subtitle is-6">August 24, 2017</h2>
+      
+        <div class="tags">
+    
+        <a class="button is-link" href="https://leomao.github.io/tags/linux">linux</a>
+    
+        <a class="button is-link" href="https://leomao.github.io/tags/ssh">ssh</a>
+    
+</div>
+
+      
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+
+<p>雖然之前一直說要寫點東西，但事實證明過這麼久仍然一點動靜也沒有。剛好有人問到說要怎麼 sync 本地和遠端的檔案，我就稍微查了一下，發覺這東西似乎還滿方便的，就來寫寫記錄一下好了。</p>
+
+<p></p>
+        
+        <a class="button is-link readmore" href="https://leomao.github.io/2017/08/sync-files-via-ssh/" style="height:28px">
+          <span style="padding-right: 5px">More</span>
+          <i class="fa fa-angle-double-right"></i>
+        </a>
+        
+      </div>
+    </article>
     
     <article>
       <h1 class="title"><a class="title-text" href="https://leomao.github.io/2017/04/static-site-generator/">Static Site Generator</a></h1>
@@ -113,8 +161,8 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.2/katex.min.js" integrity="sha256-rJnnp9xl3F5ReBkNt6k6LgeciHkW8gHFLWFVnnRmlzk=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.2/contrib/auto-render.min.js" integrity="sha256-Wb+blP9KCjsV65XUTmxKT/fisoQQM3D4bqphG8l+p9E=" crossorigin="anonymous"></script>
 <script>renderMathInElement(document.body, {
   delimiters: [
     {left: "\\[", right: "\\]", display: true},

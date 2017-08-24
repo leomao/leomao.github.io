@@ -7,10 +7,42 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Leo Mao © 2017 | &lt;a href=&#34;http://github.com/leomao/hucore&#34; target=&#34;_blank&#34;&gt;Hucore theme&lt;/a&gt; &amp; &lt;a href=&#34;http://gohugo.io&#34; target=&#34;_blank&#34;&gt;Hugo&lt;/a&gt; ♥</copyright>
-    <lastBuildDate>Wed, 05 Apr 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 24 Aug 2017 21:40:48 +0800</lastBuildDate>
     
 	<atom:link href="https://leomao.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Comments in Markdown</title>
+      <link>https://leomao.github.io/2017/08/comments-in-markdown/</link>
+      <pubDate>Thu, 24 Aug 2017 21:40:48 +0800</pubDate>
+      
+      <guid>https://leomao.github.io/2017/08/comments-in-markdown/</guid>
+      <description>&lt;p&gt;Markdown 似乎沒有註解的語法，隨意查了一下後發現一個簡單的方法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;[//]: # ( This is a comment )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;簡單來說就是建一個沒用的 link reference 來當作註解啦。這個方法可以用來設定 Vim 的 modeline，也算是解決了一個小問題。範例：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;[modeline]: # ( vim: set cc=0 tw=0: )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Sync Files via SSH</title>
+      <link>https://leomao.github.io/2017/08/sync-files-via-ssh/</link>
+      <pubDate>Thu, 24 Aug 2017 19:10:17 +0800</pubDate>
+      
+      <guid>https://leomao.github.io/2017/08/sync-files-via-ssh/</guid>
+      <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+
+&lt;p&gt;雖然之前一直說要寫點東西，但事實證明過這麼久仍然一點動靜也沒有。剛好有人問到說要怎麼 sync 本地和遠端的檔案，我就稍微查了一下，發覺這東西似乎還滿方便的，就來寫寫記錄一下好了。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Static Site Generator</title>

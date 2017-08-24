@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta content="math, programming, learning" name="keywords">
 <meta content="Leo Mao" name="author">
-<meta property="og:title" content="Posts - 0/1 World">
-<meta property="og:url" content="https://leomao.github.io/post/">
+<meta property="og:title" content="Sync Files via SSH - 0/1 World">
+<meta property="og:url" content="https://leomao.github.io/2017/08/sync-files-via-ssh/">
 <meta property="og:description" content="">
 <meta property="og:type" content="website" />
-<title>Posts | 0/1 World</title>
+<title>Sync Files via SSH | 0/1 World</title>
 <link rel="stylesheet" href="https://leomao.github.io//css/style.css">
 <link rel="shortcut icon" href="https://leomao.github.io//favicon.ico">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -51,32 +51,10 @@
 
 <section class="section">
   <div class="container">
+    <h1 class="title"><span class="title-text">Sync Files via SSH</span></h1>
+    <h2 class="subtitle is-6">August 24, 2017 </h2>
     
-    <article>
-      <h1 class="title"><a class="title-text" href="https://leomao.github.io/2017/08/comments-in-markdown/">Comments in Markdown</a></h1>
-      <h2 class="subtitle is-6">August 24, 2017</h2>
-      
-      <div class="content">
-        <p>Markdown 似乎沒有註解的語法，隨意查了一下後發現一個簡單的方法：</p>
-
-<pre><code class="language-markdown">[//]: # ( This is a comment )
-</code></pre>
-
-<p>簡單來說就是建一個沒用的 link reference 來當作註解啦。這個方法可以用來設定 Vim 的 modeline，也算是解決了一個小問題。範例：</p>
-
-<pre><code class="language-markdown">[modeline]: # ( vim: set cc=0 tw=0: )
-</code></pre>
-
-<p></p>
-        
-      </div>
-    </article>
-    
-    <article>
-      <h1 class="title"><a class="title-text" href="https://leomao.github.io/2017/08/sync-files-via-ssh/">Sync Files via SSH</a></h1>
-      <h2 class="subtitle is-6">August 24, 2017</h2>
-      
-        <div class="tags">
+      <div class="tags">
     
         <a class="button is-link" href="https://leomao.github.io/tags/linux">linux</a>
     
@@ -84,73 +62,38 @@
     
 </div>
 
-      
-      <div class="content">
-        <h1 id="introduction">Introduction</h1>
+    
+    <div class="content">
+      <h1 id="introduction">Introduction</h1>
 
 <p>雖然之前一直說要寫點東西，但事實證明過這麼久仍然一點動靜也沒有。剛好有人問到說要怎麼 sync 本地和遠端的檔案，我就稍微查了一下，發覺這東西似乎還滿方便的，就來寫寫記錄一下好了。</p>
 
 <p></p>
-        
-        <a class="button is-link readmore" href="https://leomao.github.io/2017/08/sync-files-via-ssh/" style="height:28px">
-          <span style="padding-right: 5px">More</span>
-          <i class="fa fa-angle-double-right"></i>
-        </a>
-        
-      </div>
-    </article>
-    
-    <article>
-      <h1 class="title"><a class="title-text" href="https://leomao.github.io/2017/04/static-site-generator/">Static Site Generator</a></h1>
-      <h2 class="subtitle is-6">April 5, 2017</h2>
-      
-      <div class="content">
-        <h1 id="static-site">Static Site</h1>
 
-<p>已經想要玩一下 static site generator 很久了，研究了一下後決定來玩玩看 hugo。</p>
+<h2 id="rsync-inotifywait">Rsync + Inotifywait</h2>
 
-<p></p>
-        
-        <a class="button is-link readmore" href="https://leomao.github.io/2017/04/static-site-generator/" style="height:28px">
-          <span style="padding-right: 5px">More</span>
-          <i class="fa fa-angle-double-right"></i>
-        </a>
-        
-      </div>
-    </article>
+<p>想法滿簡單的，就是利用 <code>inotifywait</code> 來偵測檔案變更然後用 <code>rsync</code> 透過 ssh 做同步。要安裝 <code>rsnyc</code> 跟 <code>inotify-tools</code>。然後看了看別人寫的 <a href="https://gist.github.com/evgenius/6019316">onchange.sh</a>，我也就直接用了。不過為了方便，我稍微改寫了一下，變成直接 sync 指定的本地和遠端目錄。
+<a href="https://gist.github.com/leomao/aa8b96a636a103fec063483c68ad7bac">→link</a></p>
+
+<pre><code class="language-console">$ watchsync.sh . host:/path/to/dir
+</code></pre>
+
+<h2 id="ssh-connection-mutiplexing">SSH Connection Mutiplexing</h2>
+
+<p>通常會想要持續 sync 八成都是因為會一直有連續的小改動，這種時候 overhead 反而會是在建立 ssh 連線上。查了一下發現了一個 ssh 的好用功能叫 connection mutiplexing，用途是共用同一個連線，就不需要反複重建連線了。設定的方法就是在 <code>~/.ssh/config</code> 下面加入</p>
+
+<pre><code>ControlMaster auto
+ControlPath ~/.ssh/sockets/%r@%h-%p
+ControlPersist 600
+</code></pre>
+
+<p>記得要先建好 <code>~/.ssh/sockets</code> 這個路徑。這東西會有兩個小問題，一個是如果用 sftp 或 scp 傳大檔案，會跟一般的 ssh 搶單一 connection 的 bandwidth，另一個則是 ssh tunnel 必須在建立連線的時候做設定，所以要單獨建立連線，是不能用這個選項的。因此在下 ssh 指令時要加入 <code>-o ControlMaster=no</code> 來關掉。
+如果懶的話其實是可以加一些 alias 來解決這個問題啦。</p>
+    </div>
     
   </div>
 </section>
-<section class="section">
-  <div class="container">
-    <nav class="level is-mobile">
-      <div class="level-left">
-        <div class="level-item">
-          
-          <a class="button is-disabled">
-            <span class="icon is-small is-marginless">
-              <i class="fa fa-angle-left"></i>
-            </span>
-            Newer
-          </a>
-          
-        </div>
-      </div>
-      <div class="level-right is-marginless">
-        <div class="level-item">
-          
-          <a class="button is-disabled">
-            Older
-            <span class="icon is-small is-marginless">
-              <i class="fa fa-angle-right"></i>
-            </span>
-          </a>
-          
-        </div>
-      </div>
-    </nav>
-  </div>
-</section>
+
 
 <section class="section">
   <div class="container has-text-centered">

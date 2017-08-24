@@ -3,13 +3,23 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://leomao.github.io/2017/08/comments-in-markdown/</loc>
+    <lastmod>2017-08-24T21:40:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://leomao.github.io/2017/08/sync-files-via-ssh/</loc>
+    <lastmod>2017-08-24T19:10:17+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://leomao.github.io/2017/04/static-site-generator/</loc>
     <lastmod>2017-04-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://leomao.github.io/</loc>
-    <lastmod>2017-04-05T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-24T21:40:48+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -19,13 +29,26 @@
   </url>
   
   <url>
+    <loc>https://leomao.github.io/tags/linux/</loc>
+    <lastmod>2017-08-24T19:10:17+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://leomao.github.io/post/</loc>
-    <lastmod>2017-04-05T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-24T21:40:48+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://leomao.github.io/tags/ssh/</loc>
+    <lastmod>2017-08-24T19:10:17+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://leomao.github.io/tags/</loc>
+    <lastmod>2017-08-24T19:10:17+08:00</lastmod>
     <priority>0</priority>
   </url>
   

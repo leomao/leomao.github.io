@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on 0/1 World</title>
+    <link>https://leomao.github.io/tags/linux/</link>
+    <description>Recent content in Linux on 0/1 World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Leo Mao © 2017 | &lt;a href=&#34;http://github.com/leomao/hucore&#34; target=&#34;_blank&#34;&gt;Hucore theme&lt;/a&gt; &amp; &lt;a href=&#34;http://gohugo.io&#34; target=&#34;_blank&#34;&gt;Hugo&lt;/a&gt; ♥</copyright>
+    <lastBuildDate>Thu, 24 Aug 2017 19:10:17 +0800</lastBuildDate>
+    
+	<atom:link href="https://leomao.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Sync Files via SSH</title>
+      <link>https://leomao.github.io/2017/08/sync-files-via-ssh/</link>
+      <pubDate>Thu, 24 Aug 2017 19:10:17 +0800</pubDate>
+      
+      <guid>https://leomao.github.io/2017/08/sync-files-via-ssh/</guid>
+      <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+
+&lt;p&gt;雖然之前一直說要寫點東西，但事實證明過這麼久仍然一點動靜也沒有。剛好有人問到說要怎麼 sync 本地和遠端的檔案，我就稍微查了一下，發覺這東西似乎還滿方便的，就來寫寫記錄一下好了。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
