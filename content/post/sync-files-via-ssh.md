@@ -27,8 +27,7 @@ ControlPath ~/.ssh/sockets/%r@%h-%p
 ControlPersist 600
 ```
 
-記得要先建好 `~/.ssh/sockets` 這個路徑。這東西會有兩個小問題，一個是如果用 sftp 或 scp 傳大檔案，會跟一般的 ssh 搶單一 connection 的 bandwidth，另一個則是 ssh tunnel 必須在建立連線的時候做設定，所以要單獨建立連線，是不能用這個選項的。因此在下 ssh 指令時要加入 `-o ControlMaster=no` 來關掉。
-如果懶的話其實是可以加一些 alias 來解決這個問題啦。
+記得要先建好 `~/.ssh/sockets` 這個路徑。這東西會有兩個小問題，一個是如果用 sftp 或 scp 傳大檔案，會跟一般的 ssh 搶單一 connection 的 bandwidth，另一個則是 ssh tunnel 必須在建立連線的時候做設定，所以要單獨建立連線，是不能用這個選項的。因此在下 ssh 指令時要加入 `-o ControlMaster=no` 來關掉。如果懶的話可以加一些 alias 來解決這個問題。
 
 [onchange.sh]: https://gist.github.com/evgenius/6019316
 
