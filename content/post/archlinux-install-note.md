@@ -45,7 +45,7 @@ tags = ["linux"]
 
 ## 分割區
 
-這邊也是有各種狀況，先用 `lsblk` 看一下硬碟的分割情況。每個分割區的代號都是 `/dev/sda1`、`/dev/sdb2` 這種樣子。最簡單的情況就是已經是 GPT 的分割表，那就用 `cgdisk` 切成自己想要的樣子。然後再用 `mkfs.` 系列把分割區格式化。幾點備忘：
+這邊也是有各種狀況，先用 `lsblk` 看一下硬碟的分割情況。每個分割區的代號都是 `/dev/sda1`、`/dev/sdb2` 這種樣子。最簡單的情況就是已經是 GPT 的分割表，那就用 `cgdisk` 切成自己想要的樣子。然後再用 `mkfs` 把分割區格式化。幾點備忘：
 
 - EFI partition 要用 FAT32 格式化 `mkfs.fat -F32 /dev/sdxY`
 - Swap 要用 `mkswap /dev/sdxY`
