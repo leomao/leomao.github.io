@@ -14,7 +14,7 @@ taxonomies:
   tag: "tags"
 
 permalinks:
-  post: "/:year/:month/:title/"
+  post: "/:year/:month/:slug/"
 
 params:
   author: "Leo Mao"
