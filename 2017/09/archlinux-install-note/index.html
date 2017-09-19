@@ -96,6 +96,8 @@
 <p>首先當然是要弄一個 Arch Linux 的開機碟，製作方法就參照 <a href="https://wiki.archlinux.org/index.php/USB_flash_installation_media">USB flash installation media</a>。但簡單來說，如果已經有一個 GNU/Linux 的環境，那就用 <code>dd</code>，如果是 Windows 的話，可以考慮用 <a href="https://rufus.akeo.ie/">Rufus</a> 或是 <a href="https://sourceforge.net/p/usbwriter/wiki/Documentation/">USBwriter</a>。
 弄好之後就用開機碟開機 (記得要用 UEFI mode)。</p>
 
+<p>不想把整個隨身碟洗掉的話，其實也可以自己切好足夠大的分割區 (大概 600 MB) 並格式化成 FAT32，然後把 ISO (解開或掛載起來) 裡面的東西丟進去即可。</p>
+
 <h2 id="網路">網路</h2>
 
 <p>這邊還滿多 cases 的，無線網路的話可以用 <code>wifi-menu</code>，有線的話分成兩個 cases：</p>
@@ -126,6 +128,7 @@
 <li>Swap 要用 <code>mkswap /dev/sdxY</code></li>
 <li>其他都可以用 <code>mkfs.ext4 /dev/sdxY</code> 來格式化</li>
 <li><strong>如果要 dual boot 且已經裝了 windows</strong>，那 EFI parition 應該已經存在，就不用動它也不用多切一塊了。</li>
+<li>如果沒有 GPT 分割表，可以用 <code>gdisk</code> 建一個新的。註：似乎也可以轉換 MBR 之類的，但我好像沒試過。</li>
 </ul>
 
 <p>格式化完就可以把分割區一個個掛起來 (<code>mount /dev/sdxY /path/to/mountpoint</code>)：</p>
@@ -224,12 +227,18 @@ rm -r cower pacaur # cleanup
 <p>其他雜項我就隨便列在下面了：</p>
 
 <ul>
-<li>裝個 <code>flatplat-theme</code> 還不錯看</li>
-<li>弄個 <a href="https://github.com/snwh/paper-icon-theme">paper icon theme</a> 好看</li>
+<li>佈景主題和桌面環境 (用 <code>gnome-tweak-tool</code> 改設定)：
+
+<ul>
+<li><code>flatplat-theme</code> 還不錯看 (記得要啟用 Extensions 裡面的 User Themes)</li>
+<li><a href="https://github.com/snwh/paper-icon-theme">paper icon theme</a> 的圖示也滿好看的</li>
+<li>推薦 <a href="https://extensions.gnome.org/extension/1031/topicons/">Topicons Plus</a> 這個 gnome shell extention 不錯用</li>
+<li>其他 Dash to X 系列的 extensions 可以自己選自己喜歡的XD</li>
+</ul></li>
 <li>輸入法我是用 ibus-rime，不過因為我是用嘸蝦米，沒太大的參考價值</li>
 <li>Tilix 是一個滿好看的 terminal，目前在 AUR 裡面，可以裝 <code>tilix-bin</code></li>
 <li>要用 Docker 的話就 <code>pacaur -S docker</code> 並 <code>systemctl enable docker</code></li>
-<li>如果有在用 numpy 之類的話，最好裝個 AUR 裡的 <code>openblas-lapack</code></li>
+<li>如果有在用 numpy 之類的話，裝個 AUR 裡的 <code>openblas-lapack</code> 效能會好很多</li>
 </ul>
 
 <h1 id="後記">後記</h1>
