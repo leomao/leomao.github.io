@@ -64,8 +64,9 @@ tags = ["linux"]
 
 # 安裝套件
 
-首先要選個 mirror 才夠快，在台灣的話我覺得用交大的是個好選擇。
-`vim /etc/pacman.d/mirrorlist` 進去後把有 `nctu` 的那個網址移到檔案最上方存檔就行了。
+首先要選個 mirror 才夠快，在台灣的話我覺得用中研院的是個好選擇。
+`vim /etc/pacman.d/mirrorlist` 進去後把有 `ntou` 的那個網址移到檔案最上方存檔就行了。
+(註：其他台灣的 mirror 也可以試試，交大的 mirror 很快但有時候會好幾天不更新...OTL)
 
 `pacstrap` 簡單來說就是把某個位置當成根目錄然後把後面給的套件全部裝進去，官方的安裝流程是直接 `pacstrap /mnt base`，不過我通常都習慣在這個時候就把我會用到的套件一次性裝好。主要是常用的 tools 跟 DE 還有字體之類的。
 
@@ -161,6 +162,7 @@ rm -r cower pacaur # cleanup
 - Tilix 是一個滿好看的 terminal，目前在 AUR 裡面，可以裝 `tilix-bin`
 - 要用 Docker 的話就 `pacaur -S docker` 並 `systemctl enable docker`
 - 如果有在用 numpy 之類的話，裝個 AUR 裡的 `openblas-lapack` 效能會好很多
+- 有時候會用到一些其他 filesystem，可以裝個 `dosfstools`, `ntfs-3g`, `exfat-utils`
 
 # 後記
 
