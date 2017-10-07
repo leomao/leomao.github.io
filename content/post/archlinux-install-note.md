@@ -154,7 +154,7 @@ rm -r cower pacaur # cleanup
 其他雜項我就隨便列在下面了：
 
 - 佈景主題和桌面環境 (用 `gnome-tweak-tool` 改設定)：
-  - `flatplat-theme` 還不錯看 (記得要啟用 Extensions 裡面的 User Themes)
+  - [Materia theme](https://github.com/nana-4/materia-theme) 還不錯 (記得要啟用 Extensions 裡面的 User Themes)
   - [paper icon theme](https://github.com/snwh/paper-icon-theme) 的圖示也滿好看的
   - 推薦 [Topicons Plus](https://extensions.gnome.org/extension/1031/topicons/) 這個 gnome shell extention 不錯用
   - 其他 Dash to X 系列的 extensions 可以自己選自己喜歡的XD
