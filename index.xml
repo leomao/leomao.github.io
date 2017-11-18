@@ -22,6 +22,8 @@
 
 &lt;p&gt;感覺近年來(?)裝了無數次的 Arch Linux，最近安裝都已經幾乎不需要看 &lt;a href=&#34;https://wiki.archlinux.org/index.php/installation_guide&#34;&gt;Installation Guide&lt;/a&gt; 了。於是決定來把現在我最常用的安裝流程記錄一下。&lt;/p&gt;
 
+&lt;p&gt;&lt;strong&gt;(2017/11/18 更新) 註：本篇內容是以當時的狀況為準，後來的更新都在 &lt;a href=&#34;https://github.com/leomao/arch-bootstrap&#34;&gt;arch-bootstrap&lt;/a&gt; 裡面&lt;/strong&gt;&lt;/p&gt;
+
 &lt;p&gt;整體來說跟 &lt;a href=&#34;https://wiki.archlinux.org/index.php/installation_guide&#34;&gt;Installation Guide&lt;/a&gt; 結構一樣，只是稍微限縮在一些我最常碰到的狀況下：&lt;/p&gt;
 
 &lt;ul&gt;
