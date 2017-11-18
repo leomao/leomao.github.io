@@ -10,6 +10,8 @@ tags = ["linux"]
 
 感覺近年來(?)裝了無數次的 Arch Linux，最近安裝都已經幾乎不需要看 [Installation Guide][install-guide] 了。於是決定來把現在我最常用的安裝流程記錄一下。
 
+**(2017/11/18 更新) 註：本篇內容是以當時的狀況為準，後來的更新都在 [arch-bootstrap][arch-bootstrap] 裡面**
+
 整體來說跟 [Installation Guide][install-guide] 結構一樣，只是稍微限縮在一些我最常碰到的狀況下：
 
 - [前置作業]({{< ref "archlinux-install-note.md#前置作業" >}})
@@ -166,7 +168,8 @@ rm -r cower pacaur # cleanup
 
 # 後記
 
-重新把之前沒完成的安裝 scripts 寫了一下，現在放在 [arch-bootstrap](https://github.com/leomao/arch-bootstrap)，不過我還沒測試過就是了。之後測試一下或是想到什麼再來補完好了。
+重新把之前沒完成的安裝 scripts 寫了一下，現在放在 [arch-bootstrap][arch-bootstrap]，不過我還沒測試過就是了。之後測試一下或是想到什麼再來補完好了。
 
 [install-guide]: https://wiki.archlinux.org/index.php/installation_guide
+[arch-bootstrap]: https://github.com/leomao/arch-bootstrap
 [modeline]: # ( vim: set cc=0 tw=0: )
