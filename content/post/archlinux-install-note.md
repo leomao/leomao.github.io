@@ -8,9 +8,9 @@ tags = ["linux"]
 
 # 前言
 
-感覺近年來(?)裝了無數次的 Arch Linux，最近安裝都已經幾乎不需要看 [Installation Guide][install-guide] 了。於是決定來把現在我最常用的安裝流程記錄一下。
+**(2018/09/12 更新) 註：稍微更新了一下本篇內容，而最新的更新都在 [arch-bootstrap][arch-bootstrap] 裡面**
 
-**(2017/11/18 更新) 註：本篇內容是以當時的狀況為準，後來的更新都在 [arch-bootstrap][arch-bootstrap] 裡面**
+感覺近年來(?)裝了無數次的 Arch Linux，最近安裝都已經幾乎不需要看 [Installation Guide][install-guide] 了。於是決定來把現在我最常用的安裝流程記錄一下。
 
 整體來說跟 [Installation Guide][install-guide] 結構一樣，只是稍微限縮在一些我最常碰到的狀況下：
 
@@ -49,13 +49,13 @@ tags = ["linux"]
 
 ## 分割區
 
-這邊也是有各種狀況，先用 `lsblk` 看一下硬碟的分割情況。每個分割區的代號都是 `/dev/sda1`、`/dev/sdb2` 這種樣子。最簡單的情況就是已經是 GPT 的分割表，那就用 `cgdisk` 切成自己想要的樣子。然後再用 `mkfs` 把分割區格式化。幾點備忘：
+這邊也是有各種狀況，先用 `lsblk` 看一下硬碟的分割情況。每個分割區的代號都是 `/dev/sda1`、`/dev/sdb2` 這種樣子。最簡單的情況就是已經是 GPT 的分割表，那就用 `cgdisk` 切成自己想要的樣子。然後再用 `mkfs` 把分割區格式化。基本上一定要有的區塊是 EFI/swap/root，對應的 partition type 跟格式化指令分別為：
 
-- EFI partition 要用 FAT32 格式化 `mkfs.fat -F32 /dev/sdxY`
-- Swap 要用 `mkswap /dev/sdxY`
-- 其他都可以用 `mkfs.ext4 /dev/sdxY` 來格式化
+- EFI: ef00, `mkfs.fat -F32 /dev/sdxY`
+- swap: 8200, `mkswap /dev/sdxY`
+- root 和其他 paritions: 8300, ext4/btrfs/xfs: `mkfs.<format> /dev/sdxY`
 - **如果要 dual boot 且已經裝了 windows**，那 EFI parition 應該已經存在，就不用動它也不用多切一塊了。
-- 如果沒有 GPT 分割表，可以用 `gdisk` 建一個新的。註：似乎也可以轉換 MBR 之類的，但我好像沒試過。
+- 如果沒有 GPT 分割表，可以用 `gdisk` 建一個新的。註：似乎也可以轉換 MBR 之類的，但我沒試過。
 
 格式化完就可以把分割區一個個掛起來 (`mount /dev/sdxY /path/to/mountpoint`)：
 
@@ -66,33 +66,35 @@ tags = ["linux"]
 
 # 安裝套件
 
-首先要選個 mirror 才夠快，在台灣的話我覺得用海大或是淡大好像都還算是好選擇。  
-`vim /etc/pacman.d/mirrorlist` 進去後把有 `ntou` 的那個網址移到檔案最上方存檔就行了。
+首先要選個 mirror 才夠快，可以從 https://www.archlinux.org/mirrors 選 Country 一樣跟 Tier 1 (台灣的話是淡大 tku 那個)。
+`vim /etc/pacman.d/mirrorlist` 進去後把有 `tku` 的那個網址移到檔案最上方存檔就行了。
 (註：其他台灣的 mirror 也可以試試，交大的 mirror 很快但有時候會好幾天不更新...OTL)
 
 `pacstrap` 簡單來說就是把某個位置當成根目錄然後把後面給的套件全部裝進去，官方的安裝流程是直接 `pacstrap /mnt base`，不過我通常都習慣在這個時候就把我會用到的套件一次性裝好。主要是常用的 tools 跟 DE 還有字體之類的。
 
 ```bash
+# 本區請參考 arch-bootstrap 內的內容，比較 up-to-date
 pacstrap /mnt base base-devel \
 intel-ucode \ # intel CPU 的話
 zsh tmux git openssh rsync sshfs neovim gvim \
 python python-pip python-neovim xclip \
-htop exa ripgrep the_silver_searcher \ # 上面幾行都是一些常用的 tools 相關的東西
+htop exa bat fd ripgrep the_silver_searcher \ # 上面幾行都是一些常用的 tools 相關的東西
 nodejs npm yarn rust go go-tools \ # 程式語言相關
 ipython python-numpy python-scipy python-matplotlib python-scikit-learn \ # python 常用
-gnome gnome-tweak-tool \ # DE 我現在主要都用 gnome shell
 cups system-config-printer hplip \ # 列印相關 (hplip for HP 的印表機)
+gnome gnome-tweak-tool \ # DE 我現在主要都用 gnome shell
 noto-fonts noto-fonts-cjk adobe-source-code-pro-fonts \ # 字體
-nvidia cuda cudnn cudnn6 \ # 如果有 GPU 要用 CUDA 的話
+nvidia cuda cudnn \ # 如果有 GPU 要用 CUDA 的話
 firefox # 雖然我平常主要是用 google chrome ...
 ```
 
 # 設定系統
 
-在 chroot 之前，`genfstab -U /mnt | sed -e 's/relatime/noatime/g' >> /mnt/etc/fstab`。
+在 chroot 之前，先生成 fsab: `genfstab -U /mnt >> /mnt/etc/fstab` (如果是用 ext4 的話，可把對應列 options 中的 relatime 改成 noatime)。
 然後就可以 `arch-chroot /mnt` 進去裡面做設定了。Chroot 進去後要做的事情可以說是非常 routine，於是我就不解釋直接寫成 script 的樣子了...
 
 ```bash
+# 同樣請參考 arch-bootstrap 內 chroot.sh 的內容
 # 語系
 sed -i -e 's/^#\(en_US\|zh_TW\)\(\.UTF-8\)/\1\2/g' /etc/locale.gen
 locale-gen
@@ -105,12 +107,12 @@ systemctl enable systemd-timesyncd
 # hostname 相關
 export HOSTNAME=<hostname> # 給電腦取個名字
 echo $HOSTNAME > /etc/hostname
-sed -ie "8i 127.0.1.1\t$HOSTNAME.localdomain\t$HOSTNAME" /etc/hosts
+sed -i -e "8i 127.0.1.1\t$HOSTNAME.localdomain\t$HOSTNAME" /etc/hosts
 # 一些需要開機做的事
 systemctl enable fstrim.timer # 好像是有 SSD 才需要
-systemctl enable NetworkManager
+systemctl enable NetworkManager # 若不是 GUI 可以直接用 netctl，相關設定請參考 Arch Wiki
 systemctl enable gdm
-sed -ie 's/#\(WaylandEnable\)/\1/' /etc/gdm/custom.conf # Wayland 還不太穩...
+sed -i -e 's/#\(WaylandEnable\)/\1/' /etc/gdm/custom.conf # Wayland 還不太穩...
 systemctl enable cups-browsed # 如果要用 printer
 # boot loader
 bootctl install
@@ -119,18 +121,17 @@ default	arch
 timeout	3
 editor	0
 EOF
+# assume root partition is /dev/sdxY
+export PARTUUID=$(blkid -s PARTUUID -o value /dev/sdxY)
 cat > /boot/loader/entries/arch.conf << EOF
 title	Arch Linux
 linux	/vmlinuz-linux
 initrd	/intel-ucode.img
 initrd	/initramfs-linux.img
-options root=PARTUUID=<PARTUUID> rw
+options root=PARTUUID=${PARTUUID} rw
 EOF
-# assume root partition is /dev/sdxY
-export PARTUUID=$(blkid -s PARTUUID -o value /dev/sdxY)
-sed -ie "s/<PARTUUID>/${PARTUUID}/" /boot/loader/entries/arch.conf
 # sudo
-sed -ie 's/# \(%wheel ALL=(ALL) ALL\)/\1/' /etc/sudoers
+sed -i -e 's/# \(%wheel ALL=(ALL) ALL\)/\1/' /etc/sudoers
 ```
 
 最後就是弄一個 user 出來：
@@ -145,23 +146,25 @@ passwd $USERNAME # 修改密碼
 
 ## 完成之後
 
-全都搞定之後，我通常還會裝個 `pacaur` 方便裝一些 AUR 裡面的東西，記錄一下流程：
+全都搞定之後，可以裝個 AUR helpers，方便裝一些 AUR 裡面的東西，目前我覺得比較好的選擇有
 
-```bash
-gpg --recv-keys --keyserver hkp://pgp.mit.edu 1EB2638FF56C0C53
-bash <(curl aur.sh) -si cower pacaur
-rm -r cower pacaur # cleanup
-```
+- [aurman](https://github.com/polygamma/aurman)
+- [yay](https://github.com/Jguer/yay)
+- [aurutils](https://github.com/AladW/aurutils)
 
-其他雜項我就隨便列在下面了：
+安裝方式就請參考各自 github 的說明了。
+
+其他雜項我大概列一些在下面了：
 
 - 佈景主題和桌面環境 (用 `gnome-tweak-tool` 改設定)：
   - [Materia theme](https://github.com/nana-4/materia-theme) 還不錯 (記得要啟用 Extensions 裡面的 User Themes)
   - [paper icon theme](https://github.com/snwh/paper-icon-theme) 的圖示也滿好看的
-  - 推薦 [Topicons Plus](https://extensions.gnome.org/extension/1031/topicons/) 這個 gnome shell extention 不錯用
-  - 其他 Dash to X 系列的 extensions 可以自己選自己喜歡的XD
-- 輸入法我是用 ibus-rime，不過因為我是用嘸蝦米，沒太大的參考價值
-- Tilix 是一個滿好看的 terminal，目前在 AUR 裡面，可以裝 `tilix-bin`
+  - gnome shell extensions:
+  - [Topicons Plus](https://extensions.gnome.org/extension/1031/topicons/)
+  - Dash to X 系列的 extensions 可以自己選自己喜歡的XD
+  - gTile 感覺還不錯用
+- 輸入法我是用 ibus-rime，有注音的 scheme 可用，不過因為我不是用注音，所以也不是很清楚好不好用
+- Tilix 是一個滿好看的 terminal，可以裝 `tilix`
 - 要用 Docker 的話就 `pacaur -S docker` 並 `systemctl enable docker`
 - 如果有在用 numpy 之類的話，裝個 AUR 裡的 `openblas-lapack` 效能會好很多
 - 有時候會用到一些其他 filesystem，可以裝個 `dosfstools`, `ntfs-3g`, `exfat-utils`
