@@ -29,3 +29,5 @@ menu:
       url: /tags/
       weight: 20
 
+params:
+  social: true
