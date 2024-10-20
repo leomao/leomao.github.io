@@ -1,0 +1,4 @@
+{{ if or .Params.math .Site.Params.math }}
+{{ partialCached "math.html" . }}
+{{ end }}
+

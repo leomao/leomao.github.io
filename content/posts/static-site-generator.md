@@ -1,6 +1,7 @@
 +++
 title = "Static Site Generator"
 date = "2017-04-05"
+math = true
 +++
 
 # Static Site
@@ -37,13 +38,11 @@ int main()
 ```
 
 ## Math
-不過我也想打點 <span>$\KaTeX$</span> (竟然不能打`\LaTeX`，不過真的滿快的)
+不過我也想打點 \(\LaTeX\)
 
-<div>
 \[
   \ln x = \int_{1}^x \frac{1}{t} \, dt
 \]
-</div>
 
 ## Conclusion
 莫名奇妙的 section，總之以後試著整理一些理論和技術文章好了...

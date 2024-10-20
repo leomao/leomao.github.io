@@ -1,0 +1,31 @@
+baseURL: "https://leomao.github.io/"
+languageCode: "zh-TW"
+title: "0/1 World"
+theme: "PaperMod"
+author: "Leo Mao"
+copyright: "Leo Mao © 2017-2018"
+
+markup:
+  goldmark:
+    extensions:
+      passthrough:
+        delimiters:
+          block:
+          - - \[
+            - \]
+          inline:
+          - - \(
+            - \)
+        enable: true
+
+menu:
+  main:
+    - identifier: archives
+      name: Archives
+      url: /archives/
+      weight: 10
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 20
+
