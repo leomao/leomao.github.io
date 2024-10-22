@@ -29,5 +29,11 @@ menu:
       url: /tags/
       weight: 20
 
+services:
+  disqus:
+    shortname: "leomao"
+
 params:
+  comments: true
   social: true
+
