@@ -47,9 +47,9 @@ projection) 來 prediction $t+1, \dots, t+k$ tokens。這個額外的 loss
 
 GRPO 看起來就是把 value model 拔掉然後直接多 sample 一些結果出來做 PPO。其中
 advantage 就直接拿這組 sample 的 reward 來估。實際上論文中不只平移 baseline
-(mean) 還除標準差 (standard deviation)。
+(mean) 還有除以標準差 (standard deviation)。
 
-我其實不確定除標準差之後是否還是原本 gradient 的 unbiased estimator，但反正
+我其實不確定除以標準差之後是否還是原本 gradient 的 unbiased estimator，但反正
 PPO 做 clipping 就已經很隨性了，更不用說這邊整個 reward 也都是 reward model
 生出來的，而 reward model 也會在訓練過程中一直變化。總之我姑且就當作是某種調整
 graident 幅度的方式，訓練能穩定可能才是最重要的。
