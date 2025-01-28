@@ -26,11 +26,10 @@ math: true
 
 ## Mixture of Experts (MoE) + Auxiliary-Loss-Free Load Balancing
 
-它這邊用的 MoE 是 layer 層級的，然後有規定 $N_s$ 個 experts 是一定要用，剩下
-$N_r$ 個裡面會選 top $k$ 個來用。然後 load balancing 是直接對每個 expert
-額外記錄一個 bias 在取 top $k$ 的時候加上去來調節。這些 bias
-項有自己的更新方式並且只是用來控制 routing 的，輸出的值還是用原本的 scores 做
-weighted sum。
+它這邊用的 MoE 是 layer 層級的，有規定 $N_s$ 個 experts 是一定要用，剩下 $N_r$
+個裡面會選 top $k$ 個來用。Load balancing 是直接對每個 expert 額外記一個
+bias，在取 top $k$ 的時候加上去來調節。這些 bias 項有自己的更新方式並且只用來控制
+routing，輸出的值還是用原本的 scores 做 weighted sum。
 
 ## Multi-Token Prediction
 
