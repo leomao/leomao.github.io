@@ -1,10 +1,9 @@
-+++
-title = "Arch Linux 安裝筆記"
-date = 2017-09-17T18:19:52+08:00
-slug = "archlinux-install-note"
-categories = []
-tags = ["linux"]
-+++
+---
+title: "Arch Linux 安裝筆記"
+date: 2017-09-17T18:19:52+08:00
+slug: "archlinux-install-note"
+tags: ["linux"]
+---
 
 # 前言
 

@@ -1,9 +1,8 @@
-+++
-title = "Comments in Markdown"
-date = 2017-08-24T21:40:48+08:00
-categories = []
-tags = []
-+++
+---
+title: "Comments in Markdown"
+date: 2017-08-24T21:40:48+08:00
+tags: []
+---
 
 Markdown 似乎沒有註解的語法，隨意查了一下後發現一個簡單的方法：
 

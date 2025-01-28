@@ -1,8 +1,8 @@
-+++
-title = "Static Site Generator"
-date = "2017-04-05"
-math = true
-+++
+---
+title: "Static Site Generator"
+date: "2017-04-05"
+math: true
+---
 
 # Static Site
 

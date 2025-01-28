@@ -1,8 +1,8 @@
-+++
-title = "Sync Files via SSH"
-date = 2017-08-24T19:10:17+08:00
-tags = ["linux", "ssh"]
-+++
+---
+title: "Sync Files via SSH"
+date: 2017-08-24T19:10:17+08:00
+tags: ["linux", "ssh"]
+---
 
 # Introduction
 
