@@ -4,8 +4,6 @@ date: "2017-04-05"
 math: true
 ---
 
-# Static Site
-
 已經想要玩一下 static site generator 很久了，研究了一下後決定來玩玩看 hugo。
 
 <!--more-->

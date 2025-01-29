@@ -10,11 +10,11 @@ Markdown 似乎沒有註解的語法，隨意查了一下後發現一個簡單�
 [//]: # ( This is a comment )
 ```
 
-簡單來說就是建一個沒用的 link reference 來當作註解啦。這個方法可以用來設定 Vim 的 modeline，也算是解決了一個小問題。範例：
+簡單來說就是建一個沒用的 link reference 來當作註解啦。這個方法可以用來設定 Vim 
+的 modeline，也算是解決了一個小問題。範例：
 
 ```markdown
 [modeline]: # ( vim: set cc=0 tw=0: )
 ```
 
-[modeline]: # ( vim: set cc=0 tw=0: )
-<!--more-->
+[modeline]: # ( vim: : )

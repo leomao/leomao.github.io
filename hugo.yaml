@@ -8,6 +8,11 @@ copyright: "Leo Mao © 2017-2025"
 markup:
   goldmark:
     extensions:
+      cjk:
+        enable: true
+        eastAsianLineBreaks: true
+        eastAsianLineBreaksStyle: css3draft
+        escapedSpace: true
       passthrough:
         delimiters:
           block:

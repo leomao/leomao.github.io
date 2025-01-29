@@ -1,15 +1,23 @@
 ---
 title: "Arch Linux 安裝筆記"
 date: 2017-09-17T18:19:52+08:00
+lastmod: 2025-01-29T15:50:28+08:00
 slug: "archlinux-install-note"
 tags: ["linux"]
 ---
 
-# 前言
+> [!CAUTION] 2025/01/29 更新
+>
+> 這篇文章的內容已過時請勿參考，我個人配置也已與這篇大不相同。
+> 如果沒特別需求的話現在 ArchLinux 有提供 
+> [archinstall](https://wiki.archlinux.org/title/Archinstall) 來安裝系統很方便。
 
-**(2018/09/12 更新) 註：稍微更新了一下本篇內容，而最新的更新都在 [arch-bootstrap][arch-bootstrap] 裡面**
+## 前言
 
-感覺近年來(?)裝了無數次的 Arch Linux，最近安裝都已經幾乎不需要看 [Installation Guide][install-guide] 了。於是決定來把現在我最常用的安裝流程記錄一下。
+**(2018/09/12 更新) 註：稍微更新了一下本篇內容，而最新的更新都在 [arch-bootstrap] 裡面**
+
+感覺近年來(?)裝了無數次的 Arch Linux，最近安裝都已經幾乎不需要看 
+[Installation Guide][install-guide] 了。於是決定來把現在我最常用的安裝流程記錄一下。
 
 整體來說跟 [Installation Guide][install-guide] 結構一樣，只是稍微限縮在一些我最常碰到的狀況下：
 
@@ -20,18 +28,20 @@ tags: ["linux"]
 
 <!--more-->
 
-# 前置作業
+## 前置作業
 
-> 下面的安裝流程都是假設要安裝一台個人用的電腦，所以都會裝 GUI 介面之類的東西。  
+> 下面的安裝流程都是假設要安裝一台個人用的電腦，所以都會裝 GUI 介面之類的東西。
 > 另外，也都假設電腦足夠新，是用 UEFI 的方式開機的。並且是 Intel 的 CPU。
 
-## 開機碟
-首先當然是要弄一個 Arch Linux 的開機碟，製作方法就參照 [USB flash installation media](https://wiki.archlinux.org/index.php/USB_flash_installation_media)。但簡單來說，如果已經有一個 GNU/Linux 的環境，那就用 `dd`，如果是 Windows 的話，可以考慮用 [Rufus](https://rufus.akeo.ie/) 或是 [USBwriter](https://sourceforge.net/p/usbwriter/wiki/Documentation/)。
+### 開機碟
+首先當然是要弄一個 Arch Linux 的開機碟，製作方法就參照 [USB flash installation media](https://wiki.archlinux.org/index.php/USB_flash_installation_media)。
+但簡單來說，如果已經有一個 GNU/Linux 的環境，那就用 `dd`，如果是 Windows 的話，
+可以考慮用 [Rufus](https://rufus.akeo.ie/) 或是 [USBwriter](https://sourceforge.net/p/usbwriter/wiki/Documentation/)。
 弄好之後就用開機碟開機 (記得要用 UEFI mode)。
 
 不想把整個隨身碟洗掉的話，其實也可以自己切好足夠大的分割區 (大概 600 MB) 並格式化成 FAT32，然後把 ISO (解開或掛載起來) 裡面的東西丟進去即可。
 
-## 網路
+### 網路
 這邊還滿多 cases 的，無線網路的話可以用 `wifi-menu`，有線的話分成兩個 cases：
 
 - 有 dhcp：那應該什麼都不用做，`curl google.com` 確認一下有沒有連到網路就是。
@@ -46,9 +56,11 @@ tags: ["linux"]
   1. `ip link set enp3s0 down` 把 interface 關掉。
   1. `netctl start ethernet-static`，最後當然還是檢查一下是否有連上網路。
 
-## 分割區
+### 分割區
 
-這邊也是有各種狀況，先用 `lsblk` 看一下硬碟的分割情況。每個分割區的代號都是 `/dev/sda1`、`/dev/sdb2` 這種樣子。最簡單的情況就是已經是 GPT 的分割表，那就用 `cgdisk` 切成自己想要的樣子。然後再用 `mkfs` 把分割區格式化。基本上一定要有的區塊是 EFI/swap/root，對應的 partition type 跟格式化指令分別為：
+這邊也是有各種狀況，先用 `lsblk` 看一下硬碟的分割情況。每個分割區的代號都是 `/dev/sda1`、`/dev/sdb2` 這種樣子。
+最簡單的情況就是已經是 GPT 的分割表，那就用 `cgdisk` 切成自己想要的樣子。然後再用 `mkfs` 把分割區格式化。
+基本上一定要有的區塊是 EFI/swap/root，對應的 partition type 跟格式化指令分別為：
 
 - EFI: ef00, `mkfs.fat -F32 /dev/sdxY`
 - swap: 8200, `mkswap /dev/sdxY`
@@ -63,13 +75,15 @@ tags: ["linux"]
 3. `swapon /dev/sdxY` 把 swap 啟用
 4. 其他 `/var`、`/home` 之類的就看需要掛載吧
 
-# 安裝套件
+## 安裝套件
 
 首先要選個 mirror 才夠快，可以從 https://www.archlinux.org/mirrors 選 Country 一樣跟 Tier 1 (台灣的話是淡大 tku 那個)。
 `vim /etc/pacman.d/mirrorlist` 進去後把有 `tku` 的那個網址移到檔案最上方存檔就行了。
 (註：其他台灣的 mirror 也可以試試，交大的 mirror 很快但有時候會好幾天不更新...OTL)
 
-`pacstrap` 簡單來說就是把某個位置當成根目錄然後把後面給的套件全部裝進去，官方的安裝流程是直接 `pacstrap /mnt base`，不過我通常都習慣在這個時候就把我會用到的套件一次性裝好。主要是常用的 tools 跟 DE 還有字體之類的。
+`pacstrap` 簡單來說就是把某個位置當成根目錄然後把後面給的套件全部裝進去，
+官方的安裝流程是直接 `pacstrap /mnt base`，不過我通常都習慣在這個時候就把我會用到的套件一次性裝好。
+主要是常用的 tools 跟 DE 還有字體之類的。
 
 ```bash
 # 本區請參考 arch-bootstrap 內的內容，比較 up-to-date
@@ -87,7 +101,7 @@ nvidia cuda cudnn \ # 如果有 GPU 要用 CUDA 的話
 firefox # 雖然我平常主要是用 google chrome ...
 ```
 
-# 設定系統
+## 設定系統
 
 在 chroot 之前，先生成 fsab: `genfstab -U /mnt >> /mnt/etc/fstab` (如果是用 ext4 的話，可把對應列 options 中的 relatime 改成 noatime)。
 然後就可以 `arch-chroot /mnt` 進去裡面做設定了。Chroot 進去後要做的事情可以說是非常 routine，於是我就不解釋直接寫成 script 的樣子了...
@@ -168,10 +182,9 @@ passwd $USERNAME # 修改密碼
 - 如果有在用 numpy 之類的話，裝個 AUR 裡的 `openblas-lapack` 效能會好很多
 - 有時候會用到一些其他 filesystem，可以裝個 `dosfstools`, `ntfs-3g`, `exfat-utils`
 
-# 後記
+## 後記
 
-重新把之前沒完成的安裝 scripts 寫了一下，現在放在 [arch-bootstrap][arch-bootstrap]，不過我還沒測試過就是了。之後測試一下或是想到什麼再來補完好了。
+重新把之前沒完成的安裝 scripts 寫了一下，現在放在 [arch-bootstrap]，不過我還沒測試過就是了。之後測試一下或是想到什麼再來補完好了。
 
 [install-guide]: https://wiki.archlinux.org/index.php/installation_guide
 [arch-bootstrap]: https://github.com/leomao/arch-bootstrap
-[modeline]: # ( vim: set cc=0 tw=0: )
