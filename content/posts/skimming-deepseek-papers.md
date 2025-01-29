@@ -27,8 +27,9 @@ math: true
 
 > 2025/01/29 Update:
 >
-> 翻了一下發現沒找到 training 的 source code，雖然可以理解不想公開大規模 
-> training 的 source code，但連 loss function 都找不到有點傻眼...
+> 翻了一下發現他們的 github 果然也是沒有 training 的 example code。雖然說現在的
+> 開放模型基本上也都只是公開模型架構跟參數，但連 loss function 的實作都沒法參考
+> 其實還挺瞎的...
 
 ## Mixture of Experts (MoE) + Auxiliary-Loss-Free Load Balancing
 
@@ -53,7 +54,7 @@ routing，輸出的值還是用原本的 scores 做 weighted sum。
 > 也沒有真的在特定 state 多 sample 不同的結果。而且比對了一下 [DeepSeekMath] 
 > 跟 [DeepSeek-V3 Technical Report] 會發現後者把 per-token 的 objective function 
 > 改成把整個 response sequence 當一個 action output。這樣改的話好像有點微妙，
-> 畢竟如果只是想要對 dataset 中每個 input (可視為 RL 環境的 intial state) 
+> 畢竟如果只是想要對 dataset 中每個 input (可視為 RL 環境的 initial state) 
 > 估一個 reward 的期望值 (i.e., value function)，直接 per-input 隨便弄個 moving
 > average 感覺也不會很耗資源？每次 sample 一堆然後 normalize 也可以看成是把
 > 舊資訊全丟掉的 moving average 啦...目前我對他 RL 這塊的論述感到有點疑惑XD
