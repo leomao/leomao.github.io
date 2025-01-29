@@ -7,7 +7,7 @@ tags: ["papers"]
 math: true
 ---
 
-這陣子有點被 Deepseek 洗版，於是就稍微瞄了一下 Deepseek 這系列的幾篇論文：
+這陣子有點被 DeepSeek 洗版，於是就稍微瞄了一下 DeepSeek 這系列的幾篇論文：
 * [DeepSeekMath]
 * [DeepSeek-V3 Technical Report]
 * [DeepSeek-R1]
@@ -76,7 +76,7 @@ graident 幅度的方式，訓練能穩定可能才是最重要的。
 加到 loss 裡面，但 reference model 其實也是某個比較舊版的 model 而已。考慮到 
 PPO 原本就~~宣稱~~是從 TRPO 改過去的，這算是某種組合拳嗎？XD
 
-話說回來，之前還有看到一篇 [REBEL]，不知道 Deepseek 這個架構用 REBEL 的 loss 
+話說回來，之前還有看到一篇 [REBEL]，不知道 DeepSeek 這個架構用 REBEL 的 loss 
 來訓練會怎樣。
 
 [DeepSeekMath]: https://arxiv.org/abs/2402.03300
