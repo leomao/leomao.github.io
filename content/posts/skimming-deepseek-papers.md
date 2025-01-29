@@ -1,6 +1,7 @@
 ---
-title: "Deepseek 論文略讀心得"
+title: "DeepSeek 論文略讀心得"
 date: 2025-01-28T23:25:55+08:00
+lastmod: 2025-01-29T12:28:31+08:00
 slug: "skimming-deepseek-papers"
 tags: ["papers"]
 math: true
@@ -16,13 +17,15 @@ math: true
 ## About papers
 
 這幾篇論文有把很多細節寫出來我還滿喜歡的。有看到 unsuccessful attempts
-滿開心的，希望以後的論文都可以多寫一點。
+滿開心的，希望以後的論文都可以多寫一點。 [DeepSeek-V3 Technical Report]
+有提到不少關於如何讓整個 pipeline 跑得快的細節，很有趣。整體來說論文寫得
+滿詳細的而且又有 open source，好像已經有 reproduce 成功的案例了？
+以工程的角度來說這幾篇真的滿有價值的。
 
-[DeepSeek-V3 Technical Report] 有提到不少關於如何讓整個 pipeline
-跑得快的細節，很有趣。
-
-整體來說論文寫得滿詳細的而且又有 open source，好像已經有 reproduce
-成功的案例了？以工程的角度來說這幾篇真的滿有價值的。
+> 2025/01/29 Update:
+>
+> 翻了一下發現沒找到 training 的 source code，雖然可以理解不想公開大規模
+> training 的 source code，但連 loss function 都找不到有點傻眼...
 
 ## Mixture of Experts (MoE) + Auxiliary-Loss-Free Load Balancing
 
@@ -40,6 +43,19 @@ projection) 來 prediction $t+1, \dots, t+k$ tokens。這個額外的 loss
 變得更容易 (讓後面的小 models) 預測接下來的 tokens。
 
 ## Group Relative Policy Optimization (GRPO)
+
+> 2025/01/29 Update:
+>
+> 其實我不確定實際上到底是因為 value model 很難學還是很貴，重新看了一下他的方法
+> 也沒有真的在特定 state 多 sample 不同的結果。而且比對了一下 [DeepSeekMath] 跟
+> [DeepSeek-V3 Technical Report] 會發現後者把 per-token 的 objective function
+> 改成整個 response sequence 當一個 action output。這樣改的話好像有點微妙，畢竟
+> 如果只是想要把 dataset 中每個 input (可視為 RL 環境的 intial state) 估一個
+> reward 的期望值 (i.e., value function)，直接 per-input 隨便弄個 moving average
+> 感覺也不會很耗資源？每次 sample 一堆然後 normalize 也可以看成是把舊資訊全丟掉的
+> moving average 啦... 目前我對於他 RL 這塊的論述感到有點疑惑XD
+>
+> 下面是我原本的 comment
 
 很多 RL 的演算法都是假設跟環境互動很貴，而且可能不能在某個特定 state
 多次嘗試。但如果沒有這些限制，而且反過來說是訓練 model 比較貴的話呢？
