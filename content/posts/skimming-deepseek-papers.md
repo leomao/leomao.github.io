@@ -7,6 +7,11 @@ tags: ["papers"]
 math: true
 ---
 
+> [!WARNING]
+> 
+> Open model 跟 open source 差滿多的我之前看網路上一直說 open source 還以為
+> 真的有公開，結果其實都只是 open model 因此修正了一下下文。
+
 這陣子有點被 DeepSeek 洗版，於是就稍微瞄了一下 DeepSeek 這系列的幾篇論文：
 * [DeepSeekMath]
 * [DeepSeek-V3 Technical Report]
@@ -22,7 +27,7 @@ math: true
 這幾篇論文有把很多細節寫出來我還滿喜歡的。有看到 unsuccessful attempts 
 滿開心的，希望以後的論文都可以多寫一點。 [DeepSeek-V3 Technical Report] 
 有提到不少關於如何讓整個 pipeline 跑得快的細節，很有趣。整體來說論文寫得
-滿詳細的而且又有 open source，好像已經有 reproduce 成功的案例了？
+滿詳細的而且又有 open model，好像已經有 reproduce 成功的案例了？
 以工程的角度來說這幾篇真的滿有價值的。
 
 > 2025/01/29 Update:
