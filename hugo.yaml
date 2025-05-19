@@ -42,3 +42,4 @@ params:
   comments: true
   social: true
 
+enableRobotsTXT: true
