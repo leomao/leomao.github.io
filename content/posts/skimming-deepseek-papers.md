@@ -38,17 +38,17 @@ math: true
 
 ## Mixture of Experts (MoE) + Auxiliary-Loss-Free Load Balancing
 
-它這邊用的 MoE 是 layer 層級的，有規定 $N_s$ 個 experts 是一定要用，剩下 $N_r$ 
-個裡面會選 top $k$ 個來用。Load balancing 是直接對每個 expert 額外記一個 bias，
-在取 top $k$ 的時候加上去來調節。這些 bias 項有自己的更新方式並且只用來控制 
-routing，輸出的值還是用原本的 scores 做 weighted sum。
+它這邊用的 MoE 是 layer 層級的，有規定 \(N_s\) 個 experts 是一定要用，剩下 
+\(N_r\) 個裡面會選 top \(k\) 個來用。Load balancing 是直接對每個 expert 額外
+記一個 bias，在取 top \(k\) 的時候加上去來調節。這些 bias 項有自己的更新方式
+並且只用來控制 routing，輸出的值還是用原本的 scores 做 weighted sum。
 
 ## Multi-Token Prediction
 
 簡單來說就是除了原本的 next token cross entropy loss 以外，他在 model 後面串了
 幾個單層的 tranformer block (每個前面有疊 RMSNorm 跟一個 linear projection) 
-來 prediction $t+1, \dots, t+k$ tokens。這個額外的 loss 主要是在訓練的時候使用，
-會讓 model 本體在最後 output head 前的 embedding 變得更容易 (讓後面的小 models) 
+來預測後面 \(k\) 個 tokens。這個額外的 loss 主要是在訓練的時候使用，會讓 model 
+本體在最後 output head 前的 embedding 變得更容易 (讓後面的小 models) 
 預測接下來的 tokens。
 
 ## Group Relative Policy Optimization (GRPO)

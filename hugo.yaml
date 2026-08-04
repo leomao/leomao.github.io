@@ -7,6 +7,9 @@ copyright: "Leo Mao © 2017-2025"
 
 markup:
   goldmark:
+    parser:
+      attribute:
+        block: true
     extensions:
       cjk:
         enable: true
@@ -33,6 +36,10 @@ menu:
       name: Tags
       url: /tags/
       weight: 20
+
+caches:
+  images:
+    dir: :cacheDir/images
 
 services:
   disqus:
